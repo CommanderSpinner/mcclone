@@ -1,0 +1,1 @@
+/usr/bin/clang++  -Wall -Werror -g -fno-rtti -fno-exceptions -ffp-model=precise -pthread -Xlinker --dependency-file=CMakeFiles/JoltViewer.dir/link.d "CMakeFiles/JoltViewer.dir/home/hui/Downloads/JoltPhysics-master/JoltViewer/JoltViewer.cpp.o" -o JoltViewer  libTestFramework.a libJolt.a /lib/libvulkan.so -lX11

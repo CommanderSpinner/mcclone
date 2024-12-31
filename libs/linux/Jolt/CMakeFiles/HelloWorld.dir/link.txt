@@ -1,0 +1,1 @@
+/usr/bin/clang++  -Wall -Werror -g -fno-rtti -fno-exceptions -ffp-model=precise -pthread -Xlinker --dependency-file=CMakeFiles/HelloWorld.dir/link.d "CMakeFiles/HelloWorld.dir/home/hui/Downloads/JoltPhysics-master/HelloWorld/HelloWorld.cpp.o" -o HelloWorld  libJolt.a

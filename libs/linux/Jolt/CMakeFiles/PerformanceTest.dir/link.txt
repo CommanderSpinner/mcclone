@@ -1,0 +1,1 @@
+/usr/bin/clang++  -Wall -Werror -g -fno-rtti -fno-exceptions -ffp-model=precise -pthread -Xlinker --dependency-file=CMakeFiles/PerformanceTest.dir/link.d "CMakeFiles/PerformanceTest.dir/home/hui/Downloads/JoltPhysics-master/PerformanceTest/PerformanceTest.cpp.o" -o PerformanceTest  libJolt.a
