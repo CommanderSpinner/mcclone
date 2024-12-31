@@ -58,3 +58,5 @@ target_link_libraries(mcclone
 
 # To include SDL2 in your runtime (optional), ensure the SDL2 binaries are found
 link_directories(${SDL2_LIBRARY_DIRS})
+
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
