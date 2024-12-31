@@ -6,17 +6,18 @@ project(mcclone)
 # Enable C++11 or newer
 set(CMAKE_CXX_STANDARD 11)
 
-# Find the libraries using pkg-config
+# Find the pkg-config package
 find_package(PkgConfig REQUIRED)
 
-# Check for the SDL2, SDL2_mixer, SDL2_image, OpenGL, and Bullet libraries
+# Check for SDL2 using pkg-config (main library only)
 pkg_check_modules(SDL2 REQUIRED sdl2)
-pkg_check_modules(SDL2_MIXER REQUIRED sdl2-mixer)
-pkg_check_modules(SDL2_IMAGE REQUIRED sdl2-image)
-pkg_check_modules(SDL2_TTF REQUIRED sdl2_ttf)
-pkg_check_modules(SDL2_ REQUIRED sdl2-image)
-pkg_check_modules(OPENGL REQUIRED opengl)
-pkg_check_modules(BULLET REQUIRED bullet)
+
+# Find other SDL2-related libraries via their respective find modules
+find_package(SDL2_mixer REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(Bullet REQUIRED)
 
 # Include the directories
 include_directories(
@@ -30,13 +31,14 @@ include_directories(
 )
 
 # Collect all .cpp and .c files in the src directory
-file(GLOB_RECURSE SOURCES
+file(GLOB SOURCES
     "src/*.cpp"
     "src/*.c"
     "src/imgui/imgui_impl_sdl2.cpp"
     "src/imgui/imgui_impl_opengl3.cpp"
     "src/imgui/imgui.cpp"
-    "src/imgui/imgui_demo.cpp"
+    #"src/imgui/imgui_demo.cpp"
+    "src/imgui/imgui_tables.cpp"
     "src/imgui/imgui_draw.cpp"
     "src/imgui/imgui_widgets.cpp"
 )
@@ -46,12 +48,12 @@ add_executable(mcclone ${SOURCES})
 
 # Link the libraries
 target_link_libraries(mcclone
-    ${SDL2_LIBRARIES}
-    ${SDL2_MIXER_LIBRARIES}
-    ${SDL2_IMAGE_LIBRARIES}
-    ${SDL2_TTF_LIBRARIES}
-    ${OPENGL_LIBRARIES}
-    ${BULLET_LIBRARIES}
+    ${SDL2_LIBRARIES}             # Link the main SDL2 library from pkg-config
+    ${SDL2_MIXER_LIBRARIES}       # Link SDL2_mixer (found via CMake find_package)
+    ${SDL2_IMAGE_LIBRARIES}       # Link SDL2_image (found via CMake find_package)
+    ${SDL2_TTF_LIBRARIES}         # Link SDL2_ttf (found via CMake find_package)
+    ${OPENGL_LIBRARIES}           # Link OpenGL
+    ${BULLET_LIBRARIES}           # Link Bullet physics library
 )
 
 # To include SDL2 in your runtime (optional), ensure the SDL2 binaries are found
