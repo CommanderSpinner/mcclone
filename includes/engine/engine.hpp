@@ -4,7 +4,7 @@
 
 class Engine{
 public:
-    Engine();
+    Engine(int argc, char** argv);
     ~Engine();
 private:
     void processInput();
@@ -12,6 +12,8 @@ private:
     void render();
     bool running;
 
+    int argc;
+    char** argv;
     Window window;
 };
 

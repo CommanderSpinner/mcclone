@@ -1,5 +1,20 @@
 #include "engine/engine.hpp"
 
+Engine::Engine(int argc, char** argv): window("MC Clone", 800, 600)
+{
+    this->argc = argc;
+    this->argv = argv;
+    running = true;
+
+    this->processInput();
+
+    while(this->running){
+        this->processInput();
+        this->update();
+        this->render();
+    }
+}
+
 void Engine::processInput()
 {
     SDL_Event e;
@@ -11,17 +26,6 @@ void Engine::processInput()
     }
 }
 
-Engine::Engine(): window("MC Clone", 800, 600)
-{
-}
-
-Engine::~Engine()
-{
-    SDL_Quit();
-}
-
-
-
 void Engine::update()
 {
 
@@ -30,4 +34,9 @@ void Engine::update()
 void Engine::render()
 {
 
+}
+
+Engine::~Engine()
+{
+    SDL_Quit();
 }
