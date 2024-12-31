@@ -11,12 +11,23 @@ void Engine::processInput()
     }
 }
 
-Engine::Engine()
+Engine::Engine(): window("MC Clone", 800, 600)
 {
-    Window window;
+}
+
+Engine::~Engine()
+{
+    SDL_Quit();
 }
 
 
-void Engine::update();
 
-void Engine::render();
+void Engine::update()
+{
+
+}
+
+void Engine::render()
+{
+
+}
