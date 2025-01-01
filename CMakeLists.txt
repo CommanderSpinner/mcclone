@@ -5,6 +5,7 @@ project(mcclone)
 
 # Enable C++11 or newer
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_C_STANDARD 11)
 
 # Find the pkg-config package
 find_package(PkgConfig REQUIRED)
