@@ -8,17 +8,16 @@ Window::Window(const char* title, int width, int height) : width(width), height(
         exit(1);
     }
 
-    renderer = SDL_CreateRenderer(sdlwindow, -1, SDL_RENDERER_ACCELERATED);
-    if (!renderer) {
+    sdlrenderer = SDL_CreateRenderer(sdlwindow, -1, SDL_RENDERER_ACCELERATED);
+    if (!sdlrenderer) {
         std::cerr << "Renderer creation failed: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(sdlwindow);
         exit(1);
     }
 
-    renderer3d = std::make_shared<Renderer3d>(this->sdlwindow, this->getWidth(), this->getHeight());
 }
 
-SDL_Window* Window::getWindow()
+SDL_Window* Window::getSDLWindow()
 {
     return sdlwindow;
 }
@@ -35,6 +34,6 @@ int Window::getWidth()
 
 
 Window::~Window() {
-    SDL_DestroyRenderer(renderer);
+    SDL_DestroyRenderer(sdlrenderer);
     SDL_DestroyWindow(sdlwindow);
 }

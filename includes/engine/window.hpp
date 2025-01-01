@@ -10,11 +10,10 @@
 
 class Window{
     SDL_Window* sdlwindow;
-    SDL_Renderer* renderer;
-    std::shared_ptr<Renderer3d> renderer3d;
+    SDL_Renderer* sdlrenderer;
     const int width, height;
 public:
-    SDL_Window* getWindow();
+    SDL_Window* getSDLWindow();
     int getWidth();
     int getHeight();
     Window(const char* title, int width, int height);

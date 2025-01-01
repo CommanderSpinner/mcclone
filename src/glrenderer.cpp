@@ -1,10 +1,11 @@
 #include "engine/glrenderer.hpp"
 #include "engine/window.hpp"
 
-Renderer3d::Renderer3d(SDL_Window* window, int width, int height)
+Renderer3d::Renderer3d(SDL_Window* sdlwindow, int width, int height)
 {
     // Create OpenGL context
-    context = SDL_GL_CreateContext(window);
+    this->sdlwindow = sdlwindow;
+    context = SDL_GL_CreateContext(sdlwindow);
     if (!context) {
         std::cerr << "Failed to create OpenGL context: " << SDL_GetError() << std::endl;
         exit(-1);
@@ -22,7 +23,10 @@ Renderer3d::Renderer3d(SDL_Window* window, int width, int height)
 
 void Renderer3d::render3d()
 {
+    glClear(GL_COLOR_BUFFER_BIT);
 
+        // Swap buffers
+    SDL_GL_SwapWindow(this->sdlwindow);
 }
 
 GLuint Renderer3d::loadTexture(const char* filePath)

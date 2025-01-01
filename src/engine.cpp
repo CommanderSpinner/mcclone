@@ -7,6 +7,8 @@ Engine::Engine(int argc, char** argv): window("MC Clone", 800, 600)
     running = true;
     this->init();
 
+    std::cout << "init sucessfull\n";
+
     // main loop
     while(this->running){
         this->processInput();
@@ -17,6 +19,8 @@ Engine::Engine(int argc, char** argv): window("MC Clone", 800, 600)
 
 void Engine::init()
 {
+    renderer3d = std::make_shared<Renderer3d>(window.getSDLWindow(), window.getWidth(), window.getHeight());
+
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "SDL_Init failed: " << SDL_GetError() << std::endl;
         exit(1);
@@ -60,7 +64,7 @@ void Engine::update()
 
 void Engine::render()
 {
-
+    this->renderer3d->render3d();
 }
 
 Engine::~Engine()

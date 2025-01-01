@@ -18,6 +18,7 @@ private:
     int argc;
     char** argv;
     Window window;
+    std::shared_ptr<Renderer3d> renderer3d;
 };
 
 #endif

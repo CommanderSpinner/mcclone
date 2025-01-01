@@ -11,9 +11,10 @@ class Renderer3d
 {
 private:
     SDL_GLContext context;
+    SDL_Window* sdlwindow;
 public:
     void render3d();
-    Renderer3d(SDL_Window* window, int width, int height);
+    Renderer3d(SDL_Window* sdlwindow, int width, int height);
     ~Renderer3d();
     static GLuint loadTexture(const char* filePath);
 };
