@@ -1,12 +1,8 @@
 #include "engine/window.hpp"
 
-Window::Window(const char* title, int width, int height) {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        std::cerr << "SDL_Init failed: " << SDL_GetError() << std::endl;
-        exit(1);
-    }
-
-    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+Window::Window(const char* title, int width, int height)
+{
+    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     if (!window) {
         std::cerr << "Window creation failed: " << SDL_GetError() << std::endl;
         exit(1);
@@ -18,6 +14,8 @@ Window::Window(const char* title, int width, int height) {
         SDL_DestroyWindow(window);
         exit(1);
     }
+
+    glrenderer = std::make_shared<Glrenderer>(window);
 }
 
 Window::~Window() {

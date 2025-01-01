@@ -7,6 +7,7 @@ public:
     Engine(int argc, char** argv);
     ~Engine();
 private:
+    void init();
     void processInput();
     void update();
     void render();
