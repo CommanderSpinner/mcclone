@@ -1,12 +1,14 @@
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
 #include "window.hpp"
+#include "glrenderer.hpp"
 
 class Engine{
 public:
     Engine(int argc, char** argv);
     ~Engine();
 private:
+    SDL_Event e;
     void init();
     void processInput();
     void update();

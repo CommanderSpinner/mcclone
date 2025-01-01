@@ -30,19 +30,24 @@ void Engine::init()
     glEnable(GL_BLEND);       // Enable transparency
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Set blending mode
     glEnable(GL_CULL_FACE);   // Enable face culling (improves performance)
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // Set the default background color
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set the default background color
 
     // Print OpenGL version
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+
+    // Initialize SDL_image with support for PNG
+    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+        std::cerr << "Failed to initialize SDL_image: " << IMG_GetError() << std::endl;
+        exit(-1);
+    }
 }
 
 
 void Engine::processInput()
 {
-    SDL_Event e;
-    while (SDL_PollEvent(&e))
+    while (SDL_PollEvent(&this->e))
     {
-        if (e.type == SDL_QUIT) {
+        if (this->e.type == SDL_QUIT) {
             running = false;
         }
     }
@@ -60,5 +65,6 @@ void Engine::render()
 
 Engine::~Engine()
 {
+    IMG_Quit();
     SDL_Quit();
 }

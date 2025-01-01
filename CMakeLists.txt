@@ -51,7 +51,8 @@ add_executable(mcclone ${SOURCES})
 target_link_libraries(mcclone
     ${SDL2_LIBRARIES}             # Link the main SDL2 library from pkg-config
     ${SDL2_MIXER_LIBRARIES}       # Link SDL2_mixer (found via CMake find_package)
-    ${SDL2_IMAGE_LIBRARIES}       # Link SDL2_image (found via CMake find_package)
+    #${SDL2_IMAGE_LIBRARIES}       # Link SDL2_image (found via CMake find_package)
+    SDL2_image
     ${SDL2_TTF_LIBRARIES}         # Link SDL2_ttf (found via CMake find_package)
     ${OPENGL_LIBRARIES}           # Link OpenGL
     ${BULLET_LIBRARIES}           # Link Bullet physics library
