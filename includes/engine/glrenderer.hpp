@@ -53,6 +53,7 @@ public:
         glm::vec3 position;
         glm::vec3 color;
     };
+    Light pointLight = {{1.0f, 1.0f, 1.0f}, {1.0f, 1.0f, 1.0f}};
     void setLightUniforms(GLuint program, Light &light);
 
     // Set camera position (to update view matrix based on user input)
