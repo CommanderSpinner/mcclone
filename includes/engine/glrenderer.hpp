@@ -19,6 +19,8 @@ private:
     glm::vec3 cameraPosition;  // Camera position for view matrix
     glm::vec3 cameraTarget;    // Camera target for view matrix
     glm::vec3 upDirection;     // Camera up direction (usually (0, 1, 0))
+    GLuint shaderProgram;
+    GLuint VAO;
 
 public:
     Renderer3d(SDL_Window* sdlwindow, int width, int height);
@@ -30,10 +32,10 @@ public:
 
     // Shader Functions
     GLuint loadShader(const char* shaderCode, GLenum shaderType);
-    GLuint createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);
+    void createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);
 
     // Vertex Buffer / Vertex Array Objects
-    GLuint createMesh(float* vertices, size_t size);
+    void Renderer3d::createMesh(float* vertices, size_t size, bool includeTexCoords);
 
     // Projection & View Matrices
     glm::mat4 createProjectionMatrix(float fov, float aspectRatio, float near, float far);

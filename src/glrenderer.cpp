@@ -1,6 +1,25 @@
 #include "engine/glrenderer.hpp"
 #include "engine/window.hpp"
 
+// for test trinagle ----
+const char* vertexShaderSource = R"(
+#version 330 core
+layout (location = 0) in vec3 aPos; // Position of vertex
+
+void main() {
+    gl_Position = vec4(aPos, 1.0); // Transform vertex position to clip space
+}
+)";
+const char* fragmentShaderSource = R"(
+#version 330 core
+out vec4 FragColor;
+
+void main() {
+    FragColor = vec4(1.0, 0.5, 0.2, 1.0); // Output color
+}
+)";
+
+
 Renderer3d::Renderer3d(SDL_Window* sdlwindow, int width, int height)
 {
     // Create OpenGL context
@@ -19,11 +38,40 @@ Renderer3d::Renderer3d(SDL_Window* sdlwindow, int width, int height)
     }
 
     glViewport(0, 0, width, height);
+
+    // for test triangle ------
+    createShaderProgram(vertexShaderSource, fragmentShaderSource);
+
+    // Triangle vertices
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f, // Bottom left
+         0.5f, -0.5f, 0.0f, // Bottom right
+         0.0f,  0.5f, 0.0f  // Top
+    };
+
+    // Create and bind VAO
+    createMesh(vertices, sizeof(vertices), false);
 }
 
+//rendering happens here
 void Renderer3d::render3d()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+    //test triangle
+
+
+    // Use the shader program
+    glUseProgram(shaderProgram);
+
+    // Bind VAO and draw the triangle
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    glBindVertexArray(0); // Unbind VAO
+    glUseProgram(0);      // Unbind shader program
+    // end of test triangle code
 
     // Swap buffers
     SDL_GL_SwapWindow(this->sdlwindow);
@@ -88,7 +136,7 @@ GLuint Renderer3d::loadShader(const char* shaderCode, GLenum shaderType) {
     return shader;
 }
 
-GLuint Renderer3d::createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource) {
+void Renderer3d::createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource) {
     GLuint vertexShader = loadShader(vertexShaderSource, GL_VERTEX_SHADER);
     GLuint fragmentShader = loadShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
 
@@ -108,31 +156,39 @@ GLuint Renderer3d::createShaderProgram(const char* vertexShaderSource, const cha
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    return shaderProgram;
+    this->shaderProgram = shaderProgram;
 }
 
-GLuint Renderer3d::createMesh(float* vertices, size_t size) {
+void Renderer3d::createMesh(float* vertices, size_t size, bool includeTexCoords) {
     GLuint VAO, VBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    glGenVertexArrays(1, &VAO); // Generate a Vertex Array Object
+    glGenBuffers(1, &VBO);      // Generate a Vertex Buffer Object
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(VAO);     // Bind the VAO
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); // Bind the VBO
+    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW); // Upload vertex data
 
-    // Assuming vertices are positions followed by texture coordinates (x, y, z, u, v)
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    // Position attribute: layout (location = 0)
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+                          includeTexCoords ? 5 * sizeof(float) : 3 * sizeof(float),
+                          (void*)0);
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+    // Texture coordinate attribute: layout (location = 1)
+    if (includeTexCoords) {
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
+                              5 * sizeof(float),
+                              (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+    }
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind the VBO
+    glBindVertexArray(0);             // Unbind the VAO
 
-    return VAO;
+    this->VAO = VAO; // Store the VAO handle for rendering
 }
+
 
 void Renderer3d::setClearColor(float r, float g, float b, float a) {
     glClearColor(r, g, b, a);
