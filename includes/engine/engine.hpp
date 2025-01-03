@@ -1,5 +1,6 @@
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
+
 #include "window.hpp"
 #include "glrenderer.hpp"
 

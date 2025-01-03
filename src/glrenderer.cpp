@@ -25,7 +25,7 @@ void Renderer3d::render3d()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-        // Swap buffers
+    // Swap buffers
     SDL_GL_SwapWindow(this->sdlwindow);
 }
 

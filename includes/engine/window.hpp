@@ -1,5 +1,6 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
+
 #include "glad/glad.h"
 #include <SDL2/SDL.h>
 #include <string>
