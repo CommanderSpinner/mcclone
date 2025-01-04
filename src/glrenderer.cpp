@@ -1,25 +1,6 @@
 #include "engine/glrenderer.hpp"
 #include "engine/window.hpp"
 
-// for test trinagle ----
-const char* vertexShaderSource = R"(
-#version 330 core
-layout (location = 0) in vec3 aPos; // Position of vertex
-
-void main() {
-    gl_Position = vec4(aPos, 1.0); // Transform vertex position to clip space
-}
-)";
-const char* fragmentShaderSource = R"(
-#version 330 core
-out vec4 FragColor;
-
-void main() {
-    FragColor = vec4(1.0, 0.5, 0.2, 1.0); // Output color
-}
-)";
-
-
 Renderer3d::Renderer3d(SDL_Window* sdlwindow, int width, int height)
 {
     // Create OpenGL context
@@ -40,7 +21,12 @@ Renderer3d::Renderer3d(SDL_Window* sdlwindow, int width, int height)
     glViewport(0, 0, width, height);
 
     // for test triangle ------
-    createShaderProgram(vertexShaderSource, fragmentShaderSource);
+    using namespace prefixes;
+    std::string vertexShaderSource = utils::getShaderCode("vertex_shader.glsl");
+
+
+    std::string fragmentShaderSource = utils::getShaderCode("fragment_shader.glsl");
+    createShaderProgram(vertexShaderSource.c_str(), fragmentShaderSource.c_str());
 
     // Triangle vertices
     float vertices[] = {
