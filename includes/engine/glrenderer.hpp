@@ -35,7 +35,7 @@ public:
     void createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);
 
     // Vertex Buffer / Vertex Array Objects
-    void Renderer3d::createMesh(float* vertices, size_t size, bool includeTexCoords);
+    void createMesh(float* vertices, size_t size, bool includeTexCoords);
 
     // Projection & View Matrices
     glm::mat4 createProjectionMatrix(float fov, float aspectRatio, float near, float far);
