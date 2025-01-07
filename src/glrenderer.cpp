@@ -37,6 +37,7 @@ Renderer3d::Renderer3d(SDL_Window* sdlwindow, int width, int height)
 
     // Create and bind VAO
     createMesh(vertices, sizeof(vertices), false);
+	// end of test traingle code in constructor ----
 }
 
 //rendering happens here
@@ -45,9 +46,7 @@ void Renderer3d::render3d()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-    //test triangle
-
-
+    //test triangle ----
     // Use the shader program
     glUseProgram(shaderProgram);
 
@@ -57,7 +56,7 @@ void Renderer3d::render3d()
 
     glBindVertexArray(0); // Unbind VAO
     glUseProgram(0);      // Unbind shader program
-    // end of test triangle code
+    // end of test triangle code ---
 
     // Swap buffers
     SDL_GL_SwapWindow(this->sdlwindow);
