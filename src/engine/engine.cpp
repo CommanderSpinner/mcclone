@@ -15,10 +15,11 @@ Engine::Engine(int argc, char** argv): window("MC Clone", 800, 600)
         this->update();
         this->render();
 		
-		// print out all errors of opengl might remove later
-		if(strcmp(argv[0], "debug") == 0){
-			print_OGL_error();
+		// print out all errors of OpenGL might remove later
+		if (argc > 1 && strcmp(argv[1], "debug") == 0) {
+			utils::print_OGL_error();
 		}
+
     }
 }
 

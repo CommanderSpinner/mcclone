@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <SDL2/SDL_opengl.h>
 
 namespace prefixes{
     const std::string assetsD = "assets/";
