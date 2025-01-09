@@ -16,6 +16,7 @@ namespace prefixes{
 namespace utils{
     std::string getFileContents(std::string fileName);
     std::string getShaderCode(std::string fileName);
+	void print_OGL_error();
 }
 
 #endif
