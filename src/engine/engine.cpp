@@ -17,6 +17,7 @@ Engine::Engine(int argc, char** argv): window("MC Clone", 800, 600)
     }
 }
 
+
 void Engine::init()
 {
     renderer3d = std::make_shared<Renderer3d>(window.getSDLWindow(), window.getWidth(), window.getHeight());
