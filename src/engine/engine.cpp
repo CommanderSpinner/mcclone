@@ -2,6 +2,10 @@
 
 Engine::Engine(int argc, char** argv): window("MC Clone", 800, 600)
 {
+	#ifndef NDEBUG
+	std::cout << "Debug build\n";
+	#endif
+	
     this->argc = argc;
     this->argv = argv;
     running = true;
@@ -16,9 +20,9 @@ Engine::Engine(int argc, char** argv): window("MC Clone", 800, 600)
         this->render();
 		
 		// print out all errors of OpenGL might remove later
-		if (argc > 1 && strcmp(argv[1], "debug") == 0) {
-			utils::print_OGL_error();
-		}
+		#ifndef NDEBUG
+		utils::print_OGL_error();
+		#endif
 
     }
 }
