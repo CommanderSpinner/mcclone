@@ -2,4 +2,4 @@
 
 cd ..
 cd build
-cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeLite" ..
+cmake -DCMAKE_BUILD_TYPE=Debug -G "Ninja" ..
