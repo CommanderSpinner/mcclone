@@ -27,7 +27,7 @@ mv mcclone mcclone-release
 
 # Debug build
 echo "Starting debug build..."
-cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeLite" ..
+cmake -DCMAKE_BUILD_TYPE=Debug -G "Ninja" ..
 if [ $? -ne 0 ]; then
   echo "Error: CMake configuration for debug build failed."
   exit 1
