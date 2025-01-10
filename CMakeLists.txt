@@ -39,6 +39,10 @@ include_directories(
 file(GLOB SOURCES
     "src/*.cpp"
     "src/*.c"
+    "src/game/*.cpp"
+    "src/game/*.c"
+    "src/engine/*.cpp"
+    "src/engine/*.c"
     "src/imgui/imgui_impl_sdl2.cpp"
     "src/imgui/imgui_impl_opengl3.cpp"
     "src/imgui/imgui.cpp"
@@ -54,10 +58,10 @@ add_executable(mcclone ${SOURCES})
 # Link the libraries
 target_link_libraries(mcclone
     ${SDL2_LIBRARIES}             # Link the main SDL2 library from pkg-config
-    ${SDL2_MIXER_LIBRARIES}       # Link SDL2_mixer (found via CMake find_package)
+    SDL2_mixer      # Link SDL2_mixer (found via CMake find_package)
     #${SDL2_IMAGE_LIBRARIES}       # Link SDL2_image (found via CMake find_package)
     SDL2_image
-    ${SDL2_TTF_LIBRARIES}         # Link SDL2_ttf (found via CMake find_package)
+    SDL2_ttf         # Link SDL2_ttf (found via CMake find_package)
     ${OPENGL_LIBRARIES}           # Link OpenGL
     ${BULLET_LIBRARIES}           # Link Bullet physics library
 )

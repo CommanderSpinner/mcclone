@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <SDL2/SDL_opengl.h>
 
 namespace prefixes{
     const std::string assetsD = "assets/";
@@ -16,6 +17,7 @@ namespace prefixes{
 namespace utils{
     std::string getFileContents(std::string fileName);
     std::string getShaderCode(std::string fileName);
+	void print_OGL_error();
 }
 
 #endif
