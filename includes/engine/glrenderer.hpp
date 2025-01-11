@@ -13,6 +13,12 @@
 #include "utils.hpp"
 #include <fstream>
 
+// Lighting
+struct Light {
+    glm::vec3 position;
+    glm::vec3 color;
+};
+
 class Renderer3d
 {
 private:
@@ -52,11 +58,7 @@ public:
     // Uniform handling (e.g., MVP matrix)
     void setUniformMat4(GLuint program, const char* name, glm::mat4 matrix);
 
-    // Lighting
-    struct Light {
-        glm::vec3 position;
-        glm::vec3 color;
-    };
+
     Light pointLight = {{1.0f, 1.0f, 1.0f}, {1.0f, 1.0f, 1.0f}};
     void setLightUniforms(GLuint program, Light &light);
 
