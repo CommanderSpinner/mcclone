@@ -11,11 +11,13 @@ struct Cordinats{
 class Entity
 {
 private:
+    static size_t count;
+    void logInstance();
     std::vector<float> vertices;
     std::string vertexShader;
     std::string fragmentShader;
     Cordinats cord;
-    Entity(std::string vertexShader, std::string fragmentShader, Cordinats cord, std::vector<float> vertices vertices);
+    Entity(std::string vertexShader, std::string fragmentShader, Cordinats cord, std::vector<float> vertices);
 public:
     virtual ~Entity();
 };
