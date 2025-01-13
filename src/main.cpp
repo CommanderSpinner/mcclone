@@ -11,7 +11,7 @@ void* operator new(size_t size){
     allocatedBytes = size;
     countAllocation++;
     if (!heapm) {
-        std::cerr << "";
+        std::cerr << "allocation failed";
         throw std::bad_alloc();
     }
 
@@ -19,8 +19,25 @@ void* operator new(size_t size){
 }
 
 void operator delete(void* ptr, size_t size) {
-    std::free(ptr); // Free memory
+    std::free(ptr);
     allocatedBytes - size;
+    countAllocation--;
+}
+
+void* operator new[](size_t size) {
+    void* heapm = std::malloc(size);
+    if (!heapm) {
+        std::cerr << "Memory allocation failed for array\n";
+        throw std::bad_alloc();
+    }
+    allocatedBytes += size;
+    countAllocation++;
+    return heapm;
+}
+
+void operator delete[](void* ptr, size_t size) noexcept {
+    std::free(ptr);
+    allocatedBytes -= size;
     countAllocation--;
 }
 
