@@ -8,7 +8,7 @@ size_t countAllocation = 0;
 
 void* operator new(size_t size){
     void* heapm = std::malloc(size);
-    allocatedBytes = size;
+    allocatedBytes += size;
     countAllocation++;
     if (!heapm) {
         std::cerr << "allocation failed";
@@ -20,7 +20,7 @@ void* operator new(size_t size){
 
 void operator delete(void* ptr, size_t size) {
     std::free(ptr);
-    allocatedBytes - size;
+    allocatedBytes -= size;
     countAllocation--;
 }
 
