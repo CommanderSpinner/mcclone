@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "utils.hpp"
 #include <fstream>
+#include <cstdlib>
 
 class Renderer3d
 {
