@@ -12,13 +12,15 @@ class Entity
 {
 private:
     static size_t count;
+    static size_t totalCreatedEntitys;
+    static size_t id;
     void logInstance();
     std::vector<float> vertices;
     std::string vertexShader;
     std::string fragmentShader;
     Cordinats cord;
-    Entity(std::string vertexShader, std::string fragmentShader, Cordinats cord, std::vector<float> vertices);
 public:
+    Entity(std::string vertexShader, std::string fragmentShader, Cordinats cord, std::vector<float> vertices);
     virtual ~Entity();
 };
 
