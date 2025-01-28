@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <typeinfo>
+#include <iostream>
 
 struct Cordinats{
     double cordX, cordY, cordZ;
@@ -22,6 +24,9 @@ private:
 public:
     Entity(std::string vertexShader, std::string fragmentShader, Cordinats cord, std::vector<float> vertices);
     virtual ~Entity();
+    virtual std::string getType() const {
+        return typeid(*this).name();
+    }
 };
 
 #endif

@@ -20,5 +20,6 @@ Entity::Entity(std::string vertexShader, std::string fragmentShader, Cordinats c
 Entity::~Entity()
 {
     this->count--;
+    std::cout << "entity:" << this->id << " destroyed, type:" << this->getType() << "\n";
 }
 
