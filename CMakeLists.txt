@@ -21,7 +21,7 @@ find_package(OpenGL REQUIRED)
 find_package(Bullet REQUIRED)
 
 # Find glm
-find_package(glm REQUIRED)
+#find_package(glm REQUIRED)
 
 # Include the directories
 include_directories(
@@ -32,7 +32,7 @@ include_directories(
     ${OPENGL_INCLUDE_DIRS}
     ${BULLET_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}/includes
-    ${GLM_INCLUDE_DIRS}
+    #${GLM_INCLUDE_DIRS}
 )
 
 # Collect all .cpp and .c files in the src directory
