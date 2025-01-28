@@ -44,6 +44,8 @@ void operator delete[](void* ptr, size_t size) noexcept {
 #endif
 
 
+#ifndef _WIN32
+
 int main(int argc, char** argv){
     Engine e(argc, argv);
 
@@ -57,8 +59,8 @@ int main(int argc, char** argv){
     return 0;
 }
 
+#else
 
-#ifdef _WIN32
 // Windows-specific WinMain entry point
 int WINAPI WinMain(
     HINSTANCE hInstance,      // Handle to the current instance of the application
